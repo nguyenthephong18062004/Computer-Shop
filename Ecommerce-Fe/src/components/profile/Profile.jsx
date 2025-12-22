@@ -31,7 +31,7 @@ const Profile = ({ data }) => {
           <img src={data.avatar} alt="" className="bg-red-600" />
         </div>
         <div className="flex flex-col items-start justify-center text-white text-base">
-          <span className="text-sm font-medium">Xin chào ,</span>
+          <span className="text-sm font-medium">Xin chào</span>
           <span className="text-sm font-medium">{data.name}</span>
         </div>
         <Dropdown />

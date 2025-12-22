@@ -30,7 +30,7 @@ app.set("view engine", "ejs");
 // Add headers before the routes are defined
 app.use(
   cors({
-    origin: "http://127.0.0.1:5173",
+    origin: ["http://127.0.0.1:5173", "http://localhost:5173"],
     methods: ["POST", "GET", "PUT","PATCH", "DELETE"],
     credentials: true,
   })
@@ -79,6 +79,20 @@ app.use(
 // Serving static files
 app.use(express.static(`${__dirname}/views`));
 app.use(express.static(`${__dirname}/public`));
+
+// Normalize query parameters (fix spaces in parameter names)
+app.use((req, res, next) => {
+  if (req.query) {
+    const normalizedQuery = {};
+    for (const [key, value] of Object.entries(req.query)) {
+      // Replace spaces with underscores in parameter names
+      const normalizedKey = key.replace(/\s+/g, '_');
+      normalizedQuery[normalizedKey] = value;
+    }
+    req.query = normalizedQuery;
+  }
+  next();
+});
 
 // Test middleware
 app.use((req, res, next) => {

@@ -4,6 +4,11 @@ const authController = require("./../controllers/authController");
 
 const router = express.Router();
 
+// Public routes for address data (no auth required)
+router.route("/provinces").get(locationController.getProvinces);
+router.route("/districts/:provinceId").get(locationController.getDistricts);
+router.route("/wards/:districtId").get(locationController.getWards);
+
 router.route("/get-nearest-location").get(locationController.nearestLocation);
 router.use(authController.protect);
 router
