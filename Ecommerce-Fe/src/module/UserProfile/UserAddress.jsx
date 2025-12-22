@@ -5,7 +5,7 @@ import Label from "../../components/label/Label";
 import Input from "../../components/input/Input";
 import { useForm } from "react-hook-form";
 import DropdownSelect from "../../components/dropdown/DropdownSelect";
-import axios from "axios";
+import addressApi from "../../api/addressApi";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Button from "../../components/button/Button";
@@ -76,22 +76,35 @@ const UserAddress = () => {
   let isLocked = false;
 
   const fetchProvince = async () => {
-    const { data } = await axios.get("https://provinces.open-api.vn/api/p");
-    setProvince(data);
+    try {
+      const response = await addressApi.getProvinces();
+      setProvince(response.data.data || response.data);
+    } catch (error) {
+      console.error("Error fetching provinces:", error);
+      toast.error("Không thể tải danh sách tỉnh/thành phố");
+    }
   };
 
   const fetchDistrict = async () => {
-    const { data } = await axios.get(
-      `https://provinces.open-api.vn/api/p/${provinceId}?depth=2`
-    );
-    setDistrict(data.districts);
+    if (!provinceId) return;
+    try {
+      const response = await addressApi.getDistricts(provinceId);
+      setDistrict(response.data.data || response.data);
+    } catch (error) {
+      console.error("Error fetching districts:", error);
+      toast.error("Không thể tải danh sách quận/huyện");
+    }
   };
 
   const fetchWard = async () => {
-    const { data } = await axios.get(
-      `https://provinces.open-api.vn/api/d/${districtId}?depth=2`
-    );
-    setWard(data.wards);
+    if (!districtId) return;
+    try {
+      const response = await addressApi.getWards(districtId);
+      setWard(response.data.data || response.data);
+    } catch (error) {
+      console.error("Error fetching wards:", error);
+      toast.error("Không thể tải danh sách phường/xã");
+    }
   };
 
   useEffect(() => {
@@ -122,7 +135,7 @@ const UserAddress = () => {
     }
   }, [showModal]);
 
-  const handleSend = (values) => {
+  const handleSend = async (values) => {
     if (!isValid) return null;
     const dataAddress = {
       name: values.fullname,
@@ -134,22 +147,24 @@ const UserAddress = () => {
     };
 
     try {
-      dispatch(addAddress(dataAddress));
+      await dispatch(addAddress(dataAddress)).unwrap();
       toast.dismiss();
       toast.success("Thêm thành công địa chỉ");
       setShowModal(false);
+      reset({
+        fullname: "",
+        sdt: "",
+        province: "",
+        dictrict: "",
+        ward: "",
+        address: "",
+      });
+      setProvinceId("");
+      setDistrictId("");
     } catch (error) {
       toast.dismiss();
-      toast.error(error.message);
+      toast.error(error.message || "Không thể thêm địa chỉ. Vui lòng thử lại!");
     }
-    reset({
-      fullname: "",
-      sdt: "",
-      province: "" && setValue("province", ""),
-      dictrict: "" && setValue("dictrict", ""),
-      ward: "" && setValue("ward", ""),
-      address: "",
-    });
   };
   return (
     <div>

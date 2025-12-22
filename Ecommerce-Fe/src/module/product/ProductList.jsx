@@ -15,7 +15,7 @@ const ProductList = ({ data, handlePageClick, page, totalPage }) => {
 
   const handleClick = (item) => {
     const path = slugify(item.title, { strict: true });
-    navigate(`/${path}/${item._id}`);
+    navigate(`/${path}/${item.id || item._id}`);
   };
   const [selectedItems, setSelectedItems] = useState([]);
 

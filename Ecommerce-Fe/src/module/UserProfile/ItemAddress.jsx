@@ -8,7 +8,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Button from "../../components/button/Button";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import axios from "axios";
+import addressApi from "../../api/addressApi";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
@@ -67,22 +67,32 @@ const ItemAddress = ({ data, data_key }) => {
   const [ward, setWard] = useState([]);
 
   const fetchProvince = async () => {
-    const { data } = await axios.get("https://provinces.open-api.vn/api/p");
-    setProvince(data);
+    try {
+      const response = await addressApi.getProvinces();
+      setProvince(response.data.data || response.data);
+    } catch (error) {
+      console.error("Error fetching provinces:", error);
+    }
   };
 
   const fetchDistrict = async () => {
-    const { data } = await axios.get(
-      `https://provinces.open-api.vn/api/p/${provinceId}?depth=2`
-    );
-    setDistrict(data.districts);
+    if (!provinceId) return;
+    try {
+      const response = await addressApi.getDistricts(provinceId);
+      setDistrict(response.data.data || response.data);
+    } catch (error) {
+      console.error("Error fetching districts:", error);
+    }
   };
 
   const fetchWard = async () => {
-    const { data } = await axios.get(
-      `https://provinces.open-api.vn/api/d/${districtId}?depth=2`
-    );
-    setWard(data.wards);
+    if (!districtId) return;
+    try {
+      const response = await addressApi.getWards(districtId);
+      setWard(response.data.data || response.data);
+    } catch (error) {
+      console.error("Error fetching wards:", error);
+    }
   };
 
   useEffect(() => {

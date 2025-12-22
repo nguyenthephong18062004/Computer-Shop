@@ -52,8 +52,14 @@ const userSlice = createSlice({
     },
   },
   extraReducers: {
+    [addAddress.pending]: (state, action) => {
+      state.add = false;
+    },
     [addAddress.fulfilled]: (state, action) => {
       state.add = true;
+    },
+    [addAddress.rejected]: (state, action) => {
+      state.add = false;
     },
     [editAddress.fulfilled]: (state, action) => {
       state.updateAddress = true;

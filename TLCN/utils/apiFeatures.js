@@ -42,6 +42,10 @@ class APIFeatures {
       if (promoObj.lt) this.where.promotion = { ...this.where.promotion, [Op.lt]: promoObj.lt };
     }
 
+    // Remove price and promotion range query parameters to avoid treating them as column names
+    const rangeParams = ['price_gte', 'price_lte', 'price_gt', 'price_lt', 'promotion_gte', 'promotion_lte', 'promotion_gt', 'promotion_lt'];
+    rangeParams.forEach((param) => delete queryObj[param]);
+
     // Handle other filters with $in (comma-separated values)
     Object.keys(queryObj).forEach((key) => {
       if (key !== 'price' && key !== 'promotion' && queryObj[key]) {

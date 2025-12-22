@@ -78,8 +78,8 @@ const productSlice = createSlice({
     },
     [getProduct.fulfilled]: (state, action) => {
       state.status = action_status.SUCCEEDED;
-      state.product = action.payload.data;
-      state.totalPage = action.payload.totalPage;
+      state.product = action.payload.data?.data || action.payload.data || [];
+      state.totalPage = action.payload.data?.totalPage || action.payload.totalPage;
     },
     [getProduct.rejected]: (state, action) => {
       state.status = action_status.FAILED;
@@ -99,8 +99,8 @@ const productSlice = createSlice({
     },
     [getProductFilter.fulfilled]: (state, action) => {
       state.statusFilter = action_status.SUCCEEDED;
-      state.productFilter = action.payload.data;
-      state.totalPageFilter = action.payload.totalPage;
+      state.productFilter = action.payload.data?.data || action.payload.data || [];
+      state.totalPageFilter = action.payload.data?.totalPage || action.payload.totalPage;
     },
     [getProductFilter.rejected]: (state, action) => {
       state.statusFilter = action_status.FAILED;
@@ -120,7 +120,7 @@ const productSlice = createSlice({
     },
     [getProductSearch.fulfilled]: (state, action) => {
       state.statusSearch = action_status.SUCCEEDED;
-      state.productSearch = action.payload.data;
+      state.productSearch = action.payload.data?.data || action.payload.data || [];
     },
     [getProductSearch.rejected]: (state, action) => {
       state.statusSearch = action_status.FAILED;
@@ -130,7 +130,7 @@ const productSlice = createSlice({
     },
     [getProductBrand.fulfilled]: (state, action) => {
       state.statusProductBrand = action_status.SUCCEEDED;
-      state.productBrand = action.payload.data;
+      state.productBrand = action.payload.data?.data || action.payload.data || [];
     },
     [getProductBrand.rejected]: (state, action) => {
       state.statusProductBrand = action_status.FAILED;

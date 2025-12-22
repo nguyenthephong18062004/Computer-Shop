@@ -33,21 +33,29 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   );
 
   // 3) Update user document
-  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
-    new: true,
-    runValidators: true,
-  });
+  const user = await User.findByPk(req.user.id);
+  if (!user) {
+    return next(new AppError("User not found", 404));
+  }
+
+  await user.update(filteredBody);
+  await user.reload();
 
   res.status(200).json({
     status: "success",
     data: {
-      user: updatedUser,
+      user: user,
     },
   });
 });
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
-  await User.findByIdAndUpdate(req.user.id, { active: "ban" });
+  const user = await User.findByPk(req.user.id);
+  if (!user) {
+    return next(new AppError("User not found", 404));
+  }
+
+  await user.update({ active: "ban" });
 
   res.status(204).json({
     status: "success",
@@ -62,103 +70,199 @@ exports.createUser = (req, res) => {
   });
 };
 exports.createAddress = catchAsync(async (req, res) => {
-  const user = req.user;
-  let arr = user.address;
-  let index = arr.length;
-  const data = {
+  const user = await User.findByPk(req.user.id);
+  if (!user) {
+    return res.status(404).json({
+      status: "error",
+      message: "User not found",
+    });
+  }
+
+  // Get current address array (parse JSON if needed)
+  let addressArray = user.address || [];
+  if (typeof addressArray === 'string') {
+    addressArray = JSON.parse(addressArray);
+  }
+  if (!Array.isArray(addressArray)) {
+    addressArray = [];
+  }
+
+  const newAddress = {
     name: req.body.name,
     phone: req.body.phone,
     province: req.body.province,
     district: req.body.district,
     ward: req.body.ward,
     detail: req.body.detail,
+    setDefault: addressArray.length === 0 ? true : false
   };
-  if (index == 0) data.setDefault = true;
-  arr.push(data);
-  user.address = arr;
-  await user.save({ validateBeforeSave: false });
+
+  addressArray.push(newAddress);
+
+  // Update user with new address array
+  await user.update({ address: addressArray });
+
+  // Reload user to get updated data
+  await user.reload();
+
   res.status(200).json({
     status: "success",
     message: "You have already added address successfully.",
-    data: user,
+    data: {
+      user: user
+    },
   });
 });
 exports.updateAddress = catchAsync(async (req, res) => {
-  const user = req.user;
+  const user = await User.findByPk(req.user.id);
+  if (!user) {
+    return res.status(404).json({
+      status: "error",
+      message: "User not found",
+    });
+  }
+
   const id = req.body.id;
-  if (user.address.length > id) {
-    let arr = user.address;
-    const data = {
+  let addressArray = user.address || [];
+  if (typeof addressArray === 'string') {
+    addressArray = JSON.parse(addressArray);
+  }
+  if (!Array.isArray(addressArray)) {
+    addressArray = [];
+  }
+
+  if (addressArray.length > id) {
+    const updatedAddress = {
       name: req.body.name,
       phone: req.body.phone,
       province: req.body.province,
       district: req.body.district,
       ward: req.body.ward,
       detail: req.body.detail,
-      setDefault: req.body.setDefault,
+      setDefault: req.body.setDefault || false,
     };
-    arr[id] = data;
-    user.address = arr;
-    await user.save({ validateBeforeSave: false });
-    res.status(200).json({
+    addressArray[id] = updatedAddress;
+    
+    await user.update({ address: addressArray });
+    await user.reload();
+
+    return res.status(200).json({
       status: "success",
       message: "You have already updated address successfully.",
+      data: {
+        user: user
+      }
     });
   }
-  res.status(500).json({
+  
+  return res.status(500).json({
     status: "error",
     message: "This data is not exist. Please try again!!!",
-    data: user,
   });
 });
 exports.deleteAddress = catchAsync(async (req, res) => {
-  const user = req.user;
-  const address = user.address;
+  const user = await User.findByPk(req.user.id);
+  if (!user) {
+    return res.status(404).json({
+      status: "error",
+      message: "User not found",
+    });
+  }
+
+  let addressArray = user.address || [];
+  if (typeof addressArray === 'string') {
+    addressArray = JSON.parse(addressArray);
+  }
+  if (!Array.isArray(addressArray)) {
+    addressArray = [];
+  }
+
   const index = req.body.id;
-  if (address.length > index) {
-    const check = address[index].setDefault;
-    address.splice(index, 1);
-    if (check == true && address.length > 0) {
-      address[0].setDefault = true;
+  if (addressArray.length > index) {
+    const check = addressArray[index].setDefault;
+    addressArray.splice(index, 1);
+    if (check === true && addressArray.length > 0) {
+      addressArray[0].setDefault = true;
     }
-    user.address = address;
-    await user.save({ validateBeforeSave: false });
+    
+    await user.update({ address: addressArray });
+    await user.reload();
+
     return res.status(200).json({
       status: "success",
       message: "Delete address successfully.",
-      data: user,
+      data: {
+        user: user
+      },
     });
   }
-  res.status(500).json({
+  
+  return res.status(500).json({
     status: "error",
     message: "This data is not exist. Please try again!!!",
   });
 });
 exports.setDefaultAddress = catchAsync(async (req, res) => {
-  const user = req.user;
-  const address = user.address;
+  const user = await User.findByPk(req.user.id);
+  if (!user) {
+    return res.status(404).json({
+      status: "error",
+      message: "User not found",
+    });
+  }
+
+  let addressArray = user.address || [];
+  if (typeof addressArray === 'string') {
+    addressArray = JSON.parse(addressArray);
+  }
+  if (!Array.isArray(addressArray)) {
+    addressArray = [];
+  }
+
   const index = req.body.id;
-  if (address.length > index) {
-    const current = await address.findIndex(
-      (value) => value.setDefault == true
+  if (addressArray.length > index) {
+    const current = addressArray.findIndex(
+      (value) => value.setDefault === true
     );
-    address[index].setDefault = true;
-    address[current].setDefault = false;
-    user.address = address;
-    await user.save({ validateBeforeSave: false });
+    if (current !== -1) {
+      addressArray[current].setDefault = false;
+    }
+    addressArray[index].setDefault = true;
+    
+    await user.update({ address: addressArray });
+    await user.reload();
+
     return res.status(200).json({
       status: "success",
       message: "Set default address successfully.",
-      data: user,
+      data: {
+        user: user
+      },
     });
   }
-  res.status(500).json({
+  
+  return res.status(500).json({
     status: "error",
     message: "This data is not exist. Please try again!!!",
   });
 });
-exports.getUserAddress = (req, res) => {
-  const address = req.user.address;
+exports.getUserAddress = catchAsync(async (req, res) => {
+  const user = await User.findByPk(req.user.id);
+  if (!user) {
+    return res.status(404).json({
+      status: "error",
+      message: "User not found",
+    });
+  }
+
+  let address = user.address || [];
+  if (typeof address === 'string') {
+    address = JSON.parse(address);
+  }
+  if (!Array.isArray(address)) {
+    address = [];
+  }
+
   res.status(200).json({
     status: "success",
     data: {
@@ -166,7 +270,7 @@ exports.getUserAddress = (req, res) => {
     },
     message: "Get all user address successfully.",
   });
-};
+});
 exports.getUser = factory.getOne(User);
 exports.getAllUsers = factory.getAll(User);
 

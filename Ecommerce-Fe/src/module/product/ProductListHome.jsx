@@ -48,7 +48,7 @@ const ProductListHome = ({ data, bg = "", className = "" }) => {
 
   const handleClick = (item) => {
     const path = slugify(item.title, { strict: true });
-    navigate(`/${path}/${item._id}`);
+    navigate(`/${path}/${item.id || item._id}`);
   };
   return (
     <div className={`${className}`}>
