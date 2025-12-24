@@ -69,49 +69,92 @@ exports.createUser = (req, res) => {
     message: "This route is not defined! Please use /signup instead",
   });
 };
-exports.createAddress = catchAsync(async (req, res) => {
-  const user = await User.findByPk(req.user.id);
-  if (!user) {
-    return res.status(404).json({
-      status: "error",
-      message: "User not found",
+exports.createAddress = catchAsync(async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.user.id);
+    if (!user) {
+      return res.status(404).json({
+        status: "error",
+        message: "User not found",
+      });
+    }
+
+    // Validate required fields
+    if (!req.body.name || !req.body.phone || !req.body.province || !req.body.district || !req.body.ward || !req.body.detail) {
+      return res.status(400).json({
+        status: "error",
+        message: "Vui lòng điền đầy đủ thông tin địa chỉ",
+      });
+    }
+
+    // Get current address array (parse JSON if needed)
+    let addressArray = user.address || [];
+    if (typeof addressArray === 'string') {
+      try {
+        addressArray = JSON.parse(addressArray);
+      } catch (e) {
+        console.error("Error parsing address JSON:", e);
+        addressArray = [];
+      }
+    }
+    if (!Array.isArray(addressArray)) {
+      addressArray = [];
+    }
+
+    const newAddress = {
+      name: req.body.name,
+      phone: req.body.phone,
+      province: req.body.province,
+      district: req.body.district,
+      ward: req.body.ward,
+      detail: req.body.detail,
+      setDefault: addressArray.length === 0 ? true : false
+    };
+
+    addressArray.push(newAddress);
+
+    // Update user with new address array
+    // For MySQL JSON fields, we use update method which handles JSON properly
+    await User.update(
+      { address: addressArray },
+      { 
+        where: { id: user.id }
+      }
+    );
+
+    // Reload user to get updated data
+    const updatedUser = await User.findByPk(user.id);
+
+    // Ensure address is parsed correctly for response
+    let responseAddress = updatedUser.address;
+    if (typeof responseAddress === 'string') {
+      try {
+        responseAddress = JSON.parse(responseAddress);
+      } catch (e) {
+        console.error("Error parsing address in response:", e);
+        responseAddress = addressArray; // Use the array we just created
+      }
+    }
+    if (!Array.isArray(responseAddress)) {
+      responseAddress = addressArray;
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "You have already added address successfully.",
+      data: {
+        user: {
+          ...updatedUser.toJSON(),
+          address: responseAddress
+        }
+      },
     });
+  } catch (error) {
+    console.error("Error in createAddress:", error);
+    console.error("Error message:", error.message);
+    console.error("Error stack:", error.stack);
+    return next(new AppError(error.message || "Không thể thêm địa chỉ. Vui lòng thử lại!", 500));
   }
-
-  // Get current address array (parse JSON if needed)
-  let addressArray = user.address || [];
-  if (typeof addressArray === 'string') {
-    addressArray = JSON.parse(addressArray);
-  }
-  if (!Array.isArray(addressArray)) {
-    addressArray = [];
-  }
-
-  const newAddress = {
-    name: req.body.name,
-    phone: req.body.phone,
-    province: req.body.province,
-    district: req.body.district,
-    ward: req.body.ward,
-    detail: req.body.detail,
-    setDefault: addressArray.length === 0 ? true : false
-  };
-
-  addressArray.push(newAddress);
-
-  // Update user with new address array
-  await user.update({ address: addressArray });
-
-  // Reload user to get updated data
-  await user.reload();
-
-  res.status(200).json({
-    status: "success",
-    message: "You have already added address successfully.",
-    data: {
-      user: user
-    },
-  });
 });
 exports.updateAddress = catchAsync(async (req, res) => {
   const user = await User.findByPk(req.user.id);

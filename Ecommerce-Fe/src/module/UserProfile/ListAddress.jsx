@@ -22,23 +22,18 @@ const ListAddress = () => {
   }, []);
 
   useEffect(() => {
-    try {
-      if (add) {
-        dispatch(getAddress());
-        dispatch(refresh());
+    const fetchAndRefresh = async () => {
+      try {
+        if (add || deleteAddress || updateAddress) {
+          await dispatch(getAddress()).unwrap(); // Wait for getAddress to complete
+          dispatch(refresh());
+        }
+      } catch (error) {
+        console.log(error.message);
       }
-      if (deleteAddress) {
-        dispatch(getAddress());
-        dispatch(refresh());
-      }
-      if (updateAddress) {
-        dispatch(getAddress());
-        dispatch(refresh());
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
-  }, [add, deleteAddress, updateAddress]);
+    };
+    fetchAndRefresh();
+  }, [add, deleteAddress, updateAddress, dispatch]);
 
   return (
     <>

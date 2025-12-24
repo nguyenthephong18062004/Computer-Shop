@@ -1,4 +1,6 @@
 import axios from "axios";
+import StorageKeys from "../utils/constants/storage-keys";
+
 const axiosClient = axios.create({
   baseURL: "http://127.0.0.1:3000",
   headers: {
@@ -6,10 +8,14 @@ const axiosClient = axios.create({
   },
   withCredentials: true,
 });
+
 axiosClient.interceptors.request.use(
   function (config) {
-    // Do something before request is sent
-
+    // Attach JWT token to Authorization header
+    const token = localStorage.getItem(StorageKeys.TOKEN);
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   function (error) {

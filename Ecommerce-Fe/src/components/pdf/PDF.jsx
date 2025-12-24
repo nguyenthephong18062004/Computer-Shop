@@ -23,9 +23,12 @@ const PDF = ({ componentRef }) => {
             >
               <div className="flex items-center gap-x-3">
                 <img
-                  src={item?.product?.images[0]}
-                  alt=""
+                  src={item?.product?.images?.[0] || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23ddd' width='400' height='300'/%3E%3Ctext fill='%23999' font-family='sans-serif' font-size='18' x='50%25' y='50%25' text-anchor='middle' dy='.3em'%3ENo Image%3C/text%3E%3C/svg%3E"}
+                  alt={item?.product?.title || "Product image"}
                   className="w-[120px] h-[120px] object-cover border-2"
+                  onError={(e) => {
+                    e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect fill='%23ddd' width='400' height='300'/%3E%3Ctext fill='%23999' font-family='sans-serif' font-size='18' x='50%25' y='50%25' text-anchor='middle' dy='.3em'%3ENo Image%3C/text%3E%3C/svg%3E";
+                  }}
                 />
                 <span className="text-lg font-medium line-clamp-2 w-[400px]">
                   {item?.product?.title}

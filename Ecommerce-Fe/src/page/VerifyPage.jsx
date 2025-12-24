@@ -38,17 +38,18 @@ const VerifyPage = () => {
       top: 0,
       behavior: "smooth",
     });
-    if (
-      JSON.parse(localStorage.getItem("user")) === null &&
-      localStorage.getItem("jwt") === null
-    ) {
+    const token = localStorage.getItem("jwt");
+    const userStr = localStorage.getItem("user");
+    const user = userStr ? JSON.parse(userStr) : null;
+    
+    if (!token || !user) {
       return navigate("/sign-up");
-    } else if (JSON.parse(localStorage.getItem("user")).active === "active") {
+    } else if (user.active === "active") {
       toast.dismiss();
       toast.success("Chào mừng bạn đến với HC.VN", { pauseOnHover: false });
       return navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   const dem = useRef(0);
   const dispatch = useDispatch();
@@ -80,7 +81,9 @@ const VerifyPage = () => {
         toast.warning("Bạn nhập sai mã xác nhận 3 lần", {
           pauseOnHover: false,
         });
-        if (JSON.parse(localStorage.getItem("user")).active === "verify") {
+        const userStr = localStorage.getItem("user");
+        const user = userStr ? JSON.parse(userStr) : null;
+        if (user && user.active === "verify") {
           const action = changeState(data);
           const resultAction = await dispatch(action);
           navigate("/sign-up");
