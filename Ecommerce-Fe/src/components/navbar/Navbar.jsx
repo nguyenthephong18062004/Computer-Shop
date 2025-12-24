@@ -135,7 +135,7 @@ const Navbar = () => {
               />
             </div>
             <span className="text-white font-medium text-3xl" title="Trang chủ">
-              HC.VN
+              Computer Store
             </span>
           </Link>
         </div>

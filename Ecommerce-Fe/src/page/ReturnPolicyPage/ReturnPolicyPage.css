@@ -1,0 +1,353 @@
+.return-policy-page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 2rem 0;
+}
+
+.return-policy-container {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+.return-policy-header {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.return-policy-back-btn {
+  color: #2563eb;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.return-policy-back-btn:hover {
+  color: #1e40af;
+}
+
+.return-policy-back-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+.return-policy-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #dc2626;
+  margin-bottom: 0.5rem;
+}
+
+.return-policy-subtitle {
+  color: #4b5563;
+}
+
+/* Content */
+.return-policy-content {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.return-policy-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.return-policy-section-border {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
+}
+
+.return-policy-section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+.return-policy-section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #374151;
+}
+
+.return-policy-text {
+  margin-bottom: 0.75rem;
+}
+
+.return-policy-highlight {
+  color: #dc2626;
+}
+
+.return-policy-link {
+  color: #2563eb;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.return-policy-link:hover {
+  color: #1e40af;
+}
+
+.return-policy-subheading {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Info Boxes */
+.return-policy-info-box {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid;
+}
+
+.return-policy-info-yellow {
+  background-color: #fefce8;
+  border-color: #eab308;
+}
+
+.return-policy-info-blue {
+  background-color: #eff6ff;
+}
+
+.return-policy-info-red {
+  background-color: #fef2f2;
+  border-color: #ef4444;
+}
+
+.return-policy-info-item {
+  margin-bottom: 0.5rem;
+}
+
+.return-policy-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.return-policy-info-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.return-policy-info-text-small {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.return-policy-info-text-small:last-child {
+  margin-bottom: 0;
+}
+
+/* Payment Methods */
+.return-policy-payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.return-policy-method-box {
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.return-policy-method-blue {
+  background-color: #eff6ff;
+}
+
+.return-policy-method-green {
+  background-color: #f0fdf4;
+}
+
+.return-policy-method-purple {
+  background-color: #faf5ff;
+}
+
+.return-policy-method-orange {
+  background-color: #fff7ed;
+}
+
+.return-policy-method-gray {
+  background-color: #f9fafb;
+}
+
+.return-policy-method-red {
+  background-color: #fef2f2;
+}
+
+.return-policy-method-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.return-policy-method-text {
+  margin-bottom: 0.5rem;
+}
+
+.return-policy-method-text-small {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Lists */
+.return-policy-list {
+  margin-left: 1rem;
+  list-style-type: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.return-policy-list-spaced {
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.return-policy-list-small {
+  font-size: 0.875rem;
+}
+
+.return-policy-list-nested {
+  margin-left: 1rem;
+  margin-top: 0.25rem;
+  gap: 0.25rem;
+}
+
+.return-policy-ordered-list {
+  margin-left: 1rem;
+  list-style-type: decimal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+}
+
+/* Table */
+.return-policy-table-wrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.return-policy-table {
+  min-width: 100%;
+  border: 1px solid #d1d5db;
+  font-size: 0.75rem;
+  border-collapse: collapse;
+}
+
+.return-policy-table-header {
+  background-color: #f3f4f6;
+}
+
+.return-policy-table-cell {
+  border: 1px solid #d1d5db;
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.return-policy-table-bold {
+  font-weight: 600;
+}
+
+.return-policy-table-row-alt {
+  background-color: #f9fafb;
+}
+
+/* Refund List */
+.return-policy-refund-list {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.return-policy-refund-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.return-policy-refund-number {
+  font-weight: 600;
+  margin-right: 0.5rem;
+  min-width: 1.5rem;
+}
+
+.return-policy-refund-immediate {
+  color: #16a34a;
+}
+
+/* Contact Section */
+.return-policy-contact {
+  background-color: #2563eb;
+  color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.return-policy-contact-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.return-policy-contact-text {
+  margin-bottom: 1rem;
+}
+
+.return-policy-contact-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .return-policy-contact-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.return-policy-contact-btn {
+  background-color: white;
+  color: #2563eb;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.return-policy-contact-btn:hover {
+  background-color: #f3f4f6;
+}
+

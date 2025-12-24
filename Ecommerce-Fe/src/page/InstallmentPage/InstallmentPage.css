@@ -1,0 +1,264 @@
+.installment-page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 2rem 0;
+}
+
+.installment-container {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+.installment-header {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.installment-back-btn {
+  color: #2563eb;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.installment-back-btn:hover {
+  color: #1e40af;
+}
+
+.installment-back-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+.installment-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #dc2626;
+  margin-bottom: 0.5rem;
+}
+
+.installment-subtitle {
+  color: #4b5563;
+}
+
+/* Content */
+.installment-content {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.installment-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.installment-section-border {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
+}
+
+.installment-section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+.installment-section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #374151;
+}
+
+.installment-text {
+  margin-bottom: 0.75rem;
+}
+
+.installment-highlight {
+  color: #0c0202;
+}
+
+.installment-link {
+  color: #2563eb;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.installment-link:hover {
+  color: #1e40af;
+}
+
+.installment-subheading {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Info Boxes */
+.installment-info-box {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid;
+}
+
+.installment-info-yellow {
+  background-color: #fefce8;
+  border-color: #eab308;
+}
+
+.installment-info-blue {
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+}
+
+.installment-info-green {
+  background-color: #f0fdf4;
+  border-color: #22c55e;
+}
+
+.installment-info-red {
+  background-color: #fef2f2;
+  border-color: #ef4444;
+}
+
+.installment-info-item {
+  margin-bottom: 0.5rem;
+}
+
+.installment-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.installment-info-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.installment-info-text-small {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.installment-info-text-small:last-child {
+  margin-bottom: 0;
+}
+
+/* Steps */
+.installment-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #374151;
+}
+
+.installment-step-box {
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.installment-step-title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+  color: #2563eb;
+}
+
+/* Lists */
+.installment-list {
+  margin-left: 1rem;
+  list-style-type: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.installment-list-spaced {
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.installment-list-small {
+  font-size: 0.875rem;
+}
+
+.installment-list-nested {
+  margin-left: 1rem;
+  margin-top: 0.25rem;
+  gap: 0.25rem;
+}
+
+.installment-ordered-list {
+  margin-left: 1rem;
+  list-style-type: decimal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+}
+
+/* Contact Info */
+.installment-contact-phone {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.installment-contact-time {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-top: 0.5rem;
+}
+
+/* Footer Message */
+.installment-footer-message {
+  background-color: #f0fdf4;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.installment-footer-text {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #15803d;
+}
+
+/* Order Link */
+.installment-order-link-wrapper {
+  text-align: center;
+}
+
+.installment-order-link {
+  display: inline-block;
+  background-color: #dc2626;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  text-decoration: none;
+}
+
+.installment-order-link:hover {
+  background-color: #b91c1c;
+}
+

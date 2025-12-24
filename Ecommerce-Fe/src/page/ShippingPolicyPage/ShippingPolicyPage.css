@@ -1,0 +1,350 @@
+.shipping-policy-page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 2rem 0;
+}
+
+.shipping-policy-container {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+.shipping-policy-header {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.shipping-policy-back-btn {
+  color: #2563eb;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.shipping-policy-back-btn:hover {
+  color: #1e40af;
+}
+
+.shipping-policy-back-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+  margin-right: 0.5rem;
+}
+
+.shipping-policy-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #dc2626;
+  margin-bottom: 0.5rem;
+}
+
+.shipping-policy-subtitle {
+  color: #4b5563;
+}
+
+/* Content */
+.shipping-policy-content {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.shipping-policy-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.shipping-policy-section-border {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.5rem;
+}
+
+.shipping-policy-section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #dc2626;
+  margin-bottom: 1rem;
+}
+
+.shipping-policy-section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #374151;
+}
+
+.shipping-policy-text {
+  margin-bottom: 0.75rem;
+}
+
+.shipping-policy-highlight {
+  color: #dc2626;
+}
+
+.shipping-policy-link {
+  color: #2563eb;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.shipping-policy-link:hover {
+  color: #1e40af;
+}
+
+.shipping-policy-subheading {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Info Boxes */
+.shipping-policy-info-box {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid;
+}
+
+.shipping-policy-info-yellow {
+  background-color: #fefce8;
+  border-color: #eab308;
+}
+
+.shipping-policy-info-blue {
+  background-color: #eff6ff;
+}
+
+.shipping-policy-info-red {
+  background-color: #fef2f2;
+  border-color: #ef4444;
+}
+
+.shipping-policy-info-item {
+  margin-bottom: 0.5rem;
+}
+
+.shipping-policy-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.shipping-policy-info-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.shipping-policy-info-text-small {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.shipping-policy-info-text-small:last-child {
+  margin-bottom: 0;
+}
+
+/* Payment Methods */
+.shipping-policy-payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.shipping-policy-method-box {
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.shipping-policy-method-blue {
+  background-color: #eff6ff;
+}
+
+.shipping-policy-method-green {
+  background-color: #f0fdf4;
+}
+
+.shipping-policy-method-purple {
+  background-color: #faf5ff;
+}
+
+.shipping-policy-method-orange {
+  background-color: #fff7ed;
+}
+
+.shipping-policy-method-gray {
+  background-color: #f9fafb;
+}
+
+.shipping-policy-method-red {
+  background-color: #fef2f2;
+}
+
+.shipping-policy-method-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.shipping-policy-method-text {
+  margin-bottom: 0.5rem;
+}
+
+.shipping-policy-method-text-small {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Lists */
+.shipping-policy-list {
+  margin-left: 1rem;
+  list-style-type: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.shipping-policy-list-spaced {
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.shipping-policy-list-small {
+  font-size: 0.875rem;
+}
+
+.shipping-policy-list-nested {
+  margin-left: 1rem;
+  margin-top: 0.25rem;
+  gap: 0.25rem;
+}
+
+.shipping-policy-ordered-list {
+  margin-left: 1rem;
+  list-style-type: decimal;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+}
+
+/* Table */
+.shipping-policy-table-wrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.shipping-policy-table {
+  min-width: 100%;
+  border: 1px solid #d1d5db;
+  font-size: 0.875rem;
+  border-collapse: collapse;
+}
+
+.shipping-policy-table-header {
+  background-color: #f3f4f6;
+}
+
+.shipping-policy-table-cell {
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+
+.shipping-policy-table-bold {
+  font-weight: 600;
+}
+
+.shipping-policy-table-row-alt {
+  background-color: #f9fafb;
+}
+
+/* Refund List */
+.shipping-policy-refund-list {
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.shipping-policy-refund-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.shipping-policy-refund-number {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.shipping-policy-refund-immediate {
+  color: #16a34a;
+}
+
+/* Contact Section */
+.shipping-policy-contact {
+  background-color: #2563eb;
+  color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.shipping-policy-contact-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.shipping-policy-contact-text {
+  margin-bottom: 1rem;
+}
+
+.shipping-policy-contact-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .shipping-policy-contact-buttons {
+    flex-direction: row;
+  }
+}
+
+.shipping-policy-contact-btn {
+  background-color: white;
+  color: #2563eb;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.shipping-policy-contact-btn:hover {
+  background-color: #f3f4f6;
+}
+
+

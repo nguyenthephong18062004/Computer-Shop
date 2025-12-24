@@ -25,6 +25,12 @@ import Navbar from "./components/navbar/Navbar";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { key } from "./utils/constants/key";
 import ChatStream from "./components/chat/ChatStream";
+import PaymentOnlinePage from "./page/PaymentOnlinePage";
+import InstallmentPage from "./page/InstallmentPage";
+import ShippingPolicyPage from "./page/ShippingPolicyPage";
+import ReturnPolicyPage from "./page/ReturnPolicyPage";
+import DataBackupPolicyPage from "./page/DataBackupPolicyPage";
+import InvoicePolicyPage from "./page/InvoicePolicyPage";
 
 function App() {
   return (
@@ -69,6 +75,12 @@ function App() {
           <Route path="/product" element={<ProductFilterPage />}></Route>
           <Route path="/payment-cash" element={<PaymentCash />}></Route>
           <Route path="/payment-bank" element={<PaymentBank />}></Route>
+          <Route path="/policy/payment-online" element={<PaymentOnlinePage />}></Route>
+          <Route path="/policy/installment" element={<InstallmentPage />}></Route>
+          <Route path="/policy/shipping" element={<ShippingPolicyPage />}></Route>
+          <Route path="/policy/return" element={<ReturnPolicyPage />}></Route>
+          <Route path="/policy/data-backup" element={<DataBackupPolicyPage />}></Route>
+          <Route path="/policy/invoice" element={<InvoicePolicyPage />}></Route>
           <Route path="/*" element={<NotFoundPage />}></Route>
         </Routes>
         <Footer />
