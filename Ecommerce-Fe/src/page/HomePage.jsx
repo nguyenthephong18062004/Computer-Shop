@@ -19,13 +19,19 @@ const HomePage = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    if (
-      localStorage.getItem("jwt") &&
-      JSON.parse(localStorage.getItem("user")).active === "verify"
-    ) {
-      toast.dismiss();
-      toast.warning("Vui lòng xác thực tài khoản", { pauseOnHover: false });
-      return navigate("/verify");
+    try {
+      const userStr = localStorage.getItem("user");
+      if (
+        localStorage.getItem("jwt") &&
+        userStr &&
+        JSON.parse(userStr)?.active === "verify"
+      ) {
+        toast.dismiss();
+        toast.warning("Vui lòng xác thực tài khoản", { pauseOnHover: false });
+        return navigate("/verify");
+      }
+    } catch (error) {
+      console.error("Error parsing user data:", error);
     }
   }, []);
 

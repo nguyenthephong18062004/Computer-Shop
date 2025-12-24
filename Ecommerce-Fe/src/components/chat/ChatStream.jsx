@@ -34,18 +34,18 @@ const ChatStream = () => {
   }, [current]);
 
   const user = {
-    name: current?.name,
+    name: current?.name || "User",
     image: current?.avatar,
-    id: current?._id,
-    role: current?.role,
+    id: current?._id || current?.id || String(current?.id || Date.now()),
+    role: current?.role || "user",
   };
 
   const admin = {
     name: "Admin",
     image:
       "https://decg5lu73tfmh.cloudfront.net/static/images/comprofiler/gallery/operator/operator_m.png",
-    id: current?._id,
-    role: current?.role,
+    id: "6370de3a54ea3d5abac936d7", // Fixed admin ID
+    role: "admin",
   };
 
   const [client, setClient] = useState(null);
@@ -53,31 +53,41 @@ const ChatStream = () => {
   const [role, setRole] = useState("user");
 
   useEffect(() => {
+    // Don't initialize if user id is missing
+    if (!user?.id || !tokenStream || !current) {
+      return;
+    }
+
     async function init() {
-      const chatClient = StreamChat.getInstance(key.REACT_APP_STREAM_API_KEY);
-      if (user?.role === "user") {
-        await chatClient.connectUser(user, tokenStream);
-        const channel = chatClient.channel("messaging", {
-          members: ["6370de3a54ea3d5abac936d7", user?.id],
-        });
-        await channel.watch();
+      try {
+        const chatClient = StreamChat.getInstance(key.REACT_APP_STREAM_API_KEY);
+        if (user?.role === "user" && user.id) {
+          await chatClient.connectUser(user, tokenStream);
+          const channel = chatClient.channel("messaging", {
+            members: ["6370de3a54ea3d5abac936d7", user.id],
+          });
+          await channel.watch();
 
-        setChannel(channel);
-      } else {
-        await chatClient.connectUser(admin, tokenStream);
-        setRole("admin");
+          setChannel(channel);
+        } else if (user?.role === "admin" && admin.id) {
+          await chatClient.connectUser(admin, tokenStream);
+          setRole("admin");
+        }
+
+        setClient(chatClient);
+      } catch (error) {
+        console.error("Error initializing StreamChat:", error);
       }
-
-      setClient(chatClient);
     }
     init();
 
-    if (client)
-      return () => {
+    return () => {
+      if (client) {
         setClient(null);
         client.disconnectUser();
-      };
-  }, [user.id, tokenStream]);
+      }
+    };
+  }, [user?.id, tokenStream, current]);
 
   if (!client)
     return (

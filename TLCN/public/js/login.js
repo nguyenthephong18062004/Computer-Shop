@@ -9,9 +9,17 @@ $("#login").click(async function (e) {
       url: "/api/v1/users/login",
       method: "post",
       data,
-      success: (data) => {
-        if (data.data.user.role == "admin") {
+      xhrFields: {
+        withCredentials: true
+      },
+      crossDomain: true,
+      success: (response) => {
+        if (response.data && response.data.user && response.data.user.role == "admin") {
           showAlert("success", "Login successfully!");
+          // Store token in localStorage as backup
+          if (response.token) {
+            localStorage.setItem("jwt", response.token);
+          }
           window.setTimeout(() => {
             location.assign("/");
           }, 1500);
@@ -19,9 +27,13 @@ $("#login").click(async function (e) {
           showAlert("error", "Tài khoản của bạn không có quyền truy cập!");
         }
       },
+      error: (xhr, status, error) => {
+        const errorMessage = xhr.responseJSON?.message || error || "Đăng nhập thất bại!";
+        showAlert("error", errorMessage);
+      }
     });
   } catch (error) {
-    showAlert("error", error.responseJSON.message);
+    showAlert("error", error.message || "Có lỗi xảy ra khi đăng nhập!");
   }
 });
 $("#checkLogin").on("change", async function () {
