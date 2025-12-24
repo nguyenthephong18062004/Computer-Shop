@@ -133,8 +133,24 @@ const Footer = () => {
               >
                 Thông tin hoá đơn mua hàng
               </Link>
-              
-              
+            </div>
+
+            <div className="mt-4">
+              <h4 className="text-sm font-semibold mb-3">Phương thức thanh toán</h4>
+              <div className="grid grid-cols-4 gap-2">
+                <div className="bg-gray-100 p-2 rounded flex items-center justify-center">
+                  <span className="text-xs">VNPAY</span>
+                </div>
+                <div className="bg-gray-100 p-2 rounded flex items-center justify-center">
+                  <span className="text-xs">MOMO</span>
+                </div>
+                <div className="bg-gray-100 p-2 rounded flex items-center justify-center">
+                  <span className="text-xs">ZaloPay</span>
+                </div>
+                <div className="bg-gray-100 p-2 rounded flex items-center justify-center">
+                  <span className="text-xs">Apple Pay</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -177,6 +193,26 @@ const Footer = () => {
               >
                 Liên hệ hợp tác kinh doanh
               </Link>
+              </div>
+
+            <div className="mt-4">
+              <h4 className="text-sm font-semibold mb-3">
+                Mua sắm dễ dàng – Ưu đãi ngập tràn cùng app Computer Store
+              </h4>
+              <div className="flex items-start space-x-4">
+                <div className="bg-gray-200 w-24 h-24 flex items-center justify-center rounded">
+                  <span className="text-xs text-center"><img src="/images/QR.png" alt="" /></span>
+                </div>
+                <div className="flex flex-col space-y-2">
+                  <Link to={"/"} className="mr-3">
+                  <img src="/images/googleplay.png" alt="" />
+                </Link>
+                  <Link to={"/"}>
+                  <img src="/images/appstore.png" alt="" />
+                </Link>
+                </div>
+              </div>
+           
             </div>
           </div>
 
@@ -257,7 +293,7 @@ const Footer = () => {
                     onClick={handleLinkClick}
                     className="text-red-600 font-semibold text-sm"
                   >
-                    dienthoaivui
+                    TTechstore
                   </Link>
                 </div>
                 <div>
@@ -269,7 +305,7 @@ const Footer = () => {
                     onClick={handleLinkClick}
                     className="text-blue-600 font-semibold text-sm"
                   >
-                    care S
+                    CCare Apple
                   </Link>
                 </div>
                 <div>
@@ -281,7 +317,7 @@ const Footer = () => {
                     onClick={handleLinkClick}
                     className="text-red-600 font-semibold text-sm"
                   >
-                    SChannel
+                    Social Network
                   </Link>
                 </div>
                 <div>
@@ -293,7 +329,7 @@ const Footer = () => {
                     onClick={handleLinkClick}
                     className="text-red-600 font-semibold text-sm"
                   >
-                    Sforum.vn
+                    NewTech.vn
                   </Link>
                 </div>
               </div>
