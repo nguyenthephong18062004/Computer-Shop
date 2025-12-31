@@ -13,7 +13,7 @@ import ListAddress from "./ListAddress";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { addAddress } from "../../redux/auth/addressSlice";
+import { addAddress, getAddress } from "../../redux/auth/addressSlice";
 import { useNavigate } from "react-router-dom";
 
 const schema = yup.object({
@@ -148,6 +148,8 @@ const UserAddress = () => {
 
     try {
       await dispatch(addAddress(dataAddress)).unwrap();
+      // Fetch updated address list
+      await dispatch(getAddress()).unwrap();
       toast.dismiss();
       toast.success("Thêm thành công địa chỉ");
       setShowModal(false);

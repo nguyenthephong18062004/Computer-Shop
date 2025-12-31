@@ -60,6 +60,8 @@ const createSendToken = async (user, statusCode, res) => {
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
+    sameSite: 'lax', // Allow cookie to be sent with same-site requests
+    path: '/', // Make cookie available for all routes
   };
   if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
 

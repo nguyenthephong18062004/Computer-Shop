@@ -11,19 +11,17 @@ const PaymentCash = () => {
       top: 0,
       behavior: "smooth",
     });
-    if (
-      localStorage.getItem("jwt") &&
-      JSON.parse(localStorage.getItem("user")).active === "verify"
-    ) {
+    const token = localStorage.getItem("jwt");
+    const userStr = localStorage.getItem("user");
+    const user = userStr ? JSON.parse(userStr) : null;
+    
+    if (token && user && user.active === "verify") {
       return navigate("/verify");
     }
-    if (
-      localStorage.getItem("jwt") === null &&
-      JSON.parse(localStorage.getItem("user")) === null
-    ) {
+    if (!token || !user) {
       return navigate("/sign-in");
     }
-  }, []);
+  }, [navigate]);
   return (
     <div className="mt-10">
       <div className="container bg-white rounded-lg flex flex-col items-center p-10">

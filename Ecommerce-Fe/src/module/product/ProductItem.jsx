@@ -25,11 +25,20 @@ const ProductItem = ({
     >
       <img
         src={
-          product?.images[0] ||
-          "https://lh3.googleusercontent.com/ZQFbZeosDa1ODQnaaunB72fejXPcl_hg7rfEcgVlZSkgtOTAHQH1M4RxVrH2cLN6gjqJvOAq1b8CeE92gjqDN2W3b2HsMkxb=rw"
+          product?.images?.[0] ||
+          "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=600&fit=crop&q=80"
         }
-        alt=""
+        alt={product?.title || "Product image"}
         className="w-full h-[180px] object-cover rounded-lg mb-2 transition-transform hover:scale-105"
+        onError={(e) => {
+          // Fallback to Unsplash image if original fails
+          if (!e.target.src.includes('unsplash.com')) {
+            e.target.src = "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=600&fit=crop&q=80";
+          } else {
+            // Final fallback to data URI
+            e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect fill='%23e5e7eb' width='800' height='600'/%3E%3Ctext fill='%23999' font-family='sans-serif' font-size='24' x='50%25' y='50%25' text-anchor='middle' dy='.3em'%3ELaptop%3C/text%3E%3C/svg%3E";
+          }
+        }}
       />
       <div className="flex flex-col flex-1">
         <h3 className="line-clamp-2 mb-2 text-sm font-medium">

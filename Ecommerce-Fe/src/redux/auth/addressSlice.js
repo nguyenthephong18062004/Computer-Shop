@@ -4,29 +4,49 @@ import { action_status } from "../../utils/constants/status";
 
 export const addAddress = createAsyncThunk(
   "user/addAdress",
-  async (payload) => {
-    const response = await userApi.addAddress(payload);
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await userApi.addAddress(payload);
+      return response.data.user.address; // Return updated address array
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
 export const editAddress = createAsyncThunk(
   "user/editAddress",
-  async (payload) => {
-    const response = await userApi.updateAddress(payload);
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await userApi.updateAddress(payload);
+      return response.data.user.address;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
 export const deleteAddress = createAsyncThunk(
   "user/deleteAddress",
-  async (payload) => {
-    const response = await userApi.deleteAddress(payload);
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await userApi.deleteAddress(payload);
+      return response.data.user.address;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
 export const setAddressDefault = createAsyncThunk(
   "user/setAddressDefault",
-  async (payload) => {
-    const response = await userApi.updateDefault(payload);
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await userApi.updateDefault(payload);
+      return response.data.user.address;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
 );
 
@@ -57,18 +77,22 @@ const userSlice = createSlice({
     },
     [addAddress.fulfilled]: (state, action) => {
       state.add = true;
+      state.address = action.payload || []; // Update address list with new data
     },
     [addAddress.rejected]: (state, action) => {
       state.add = false;
     },
     [editAddress.fulfilled]: (state, action) => {
       state.updateAddress = true;
+      state.address = action.payload || [];
     },
     [setAddressDefault.fulfilled]: (state, action) => {
       state.updateAddress = true;
+      state.address = action.payload || [];
     },
     [deleteAddress.fulfilled]: (state, action) => {
       state.deleteAddress = true;
+      state.address = action.payload || [];
     },
     [getAddress.pending]: (state, action) => {
       state.status = action_status.LOADING;

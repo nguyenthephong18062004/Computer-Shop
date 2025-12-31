@@ -30,19 +30,19 @@ const CartPage = () => {
       top: 0,
       behavior: "smooth",
     });
-    if (
-      localStorage.getItem("jwt") &&
-      JSON.parse(localStorage.getItem("user")).active === "verify"
-    ) {
+    const token = localStorage.getItem("jwt");
+    const userStr = localStorage.getItem("user");
+    const user = userStr ? JSON.parse(userStr) : null;
+    
+    if (token && user && user.active === "verify") {
       return navigate("/verify");
     }
-    if (
-      localStorage.getItem("jwt") === null &&
-      JSON.parse(localStorage.getItem("user")) === null
-    ) {
+    if (!token || !user) {
       setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
     }
-  }, []);
+  }, [navigate]);
   const handleClick = () => {
     navigate("/sign-in");
   };
